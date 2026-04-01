@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { expect, test } from '@playwright/test';
 
 export class CreateArticlePage {
@@ -7,12 +8,45 @@ export class CreateArticlePage {
       name: 'Publish Article',
     });
     this.errorMessage = page.getByRole('list').nth(1);
+    this.articleTitleField = page.getByPlaceholder('Article Title');
+    this.articleSummaryField = page.getByPlaceholder(
+      'What\'s this article about?'
+    );
+    this.articleBodyField = page.getByPlaceholder(
+      'Write your article (in markdown)'
+    );
+    this.articleTagsField = page.getByPlaceholder('Enter tags');
+
   }
 
   async clickPublishArticleButton() {
     await test.step(`Click the 'Publish Article' button`, async () => {
       await this.publishArticleButton.click();
     });
+  }
+
+  async fillArticleTitleField() {
+    await test.step(`Fill the 'Article Title' field`, async () => {
+      await this.articleTitleField.fill(faker.book.title());
+    })
+  }
+
+  async fillArticleSummaryField() {
+    await test.step(`Fill the 'Article Title' field`, async () => {
+      await this.articleSummaryField.fill(faker.lorem.paragraph());
+    })
+  }
+
+  async fillArticleBodyField() {
+    await test.step(`Fill the 'Article Title' field`, async () => {
+      await this.articleBodyField.fill(faker.lorem.paragraphs(3));
+    })
+  }
+
+  async fillArticleTagsField() {
+    await test.step(`Fill the 'Article Title' field`, async () => {
+      await this.articleTagsField.fill(faker.lorem.word());
+    })
   }
 
   async assertErrorMessageContainsText(messageText) {
