@@ -26,7 +26,7 @@ test.beforeEach(async ({ page }) => {
   await homePage.assertYourFeedTabIsVisible();
 });
 
-test('Creat an article with mandatory and optional fields', async () => {
+test('Create an article with mandatory and optional fields', async () => {
   await homePage.clickNewArticleLink();
 
   await createArticlePage.fillArticleTitleField();
@@ -34,4 +34,5 @@ test('Creat an article with mandatory and optional fields', async () => {
   await createArticlePage.fillArticleBodyField();
   await createArticlePage.fillArticleTagsField();
   await createArticlePage.clickPublishArticleButton();
+  await createArticlePage.assertThatUserNavigatedToCreatedArticlePage();
 });
