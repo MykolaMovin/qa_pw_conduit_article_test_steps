@@ -28,10 +28,10 @@ test.beforeEach(async ({ page }) => {
 
 test('Create an article without a tag', async () => {
   await homePage.clickNewArticleLink();
+
   await createArticlePage.fillArticleTitleField();
   await createArticlePage.fillArticleSummaryField();
   await createArticlePage.fillArticleBodyField();
-
   await createArticlePage.clickPublishArticleButton();
-  
+  await createArticlePage.assertThatUserNavigatedToCreatedArticlePage();
 });
